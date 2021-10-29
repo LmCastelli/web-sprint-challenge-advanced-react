@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import useForm from "../hooks/useForm";
 import useLocalStorage from "../hooks/useLocalStorage";
 
@@ -18,8 +18,6 @@ const initialValue = {
 const CheckoutForm = (props) => {
   const [showSuccessMessage, setShowSuccessMessage] = useLocalStorage("success", false);
   const [values, handleChanges] = useForm(initialValue);
-
-  
 
   const handleSubmit = (e) => {
     e.preventDefault();
