@@ -32,14 +32,20 @@ test("shows success message on submit with form details", async () => {
     const zip = screen.getByLabelText("Zip:");
     userEvent.type(zip, "12345");
 
-    const button = screen.findByRole("button");
+    const button = screen.getByRole("button");
     userEvent.click(button);
 
     await waitFor(() => {
-        const output = screen.queryByText(/You have ordered some plants! Woo-hoo! 🎉 Your new green friends will be shipped to:/i);
+        const output = screen.queryByText(/You have ordered some plants! Woo-Hoo!/i);
         expect(output).toBeInTheDocument();
 
-        const orderinfo = screen.queryByText(/Billy TheKid 123 WildWest Street Outlaw, Arizona 12345/i);
-        expect(orderinfo).toBeInTheDocument();
+        const orderName = screen.queryByText(/Billy TheKid/i);
+        expect(orderName).toBeInTheDocument();
+
+        const orderStreet = screen.queryByText(/123 WildWest Street/i);
+        expect(orderStreet).toBeInTheDocument();
+
+        const orderCityState = screen.queryByText(/Outlaw, Arizona 12345/i);
+        expect(orderCityState).toBeInTheDocument();
     })
 });
